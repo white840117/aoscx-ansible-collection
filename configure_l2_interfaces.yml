@@ -5,6 +5,37 @@
     ansible_python_interpreter: /usr/bin/python3
   gather_facts: False
   tasks:
+    - name: Create VLAN 300
+      aoscx_vlan:
+        vlan_id: 300
+        name: Building-3
+
+    - name: Create VLAN 400
+      aoscx_vlan:
+        vlan_id: 400
+        description: Building-4
+
+    - name: Configure Interface 1/1/11 - vlan trunk allowed 300,400 , vlan trunk native 300
+      aoscx_l2_interface:
+        interface: 1/1/11
+        vlan_mode: trunk
+        vlan_trunks: ['400','300']
+        native_vlan_id: '300'
+
+    - name: Configure Interface 1/1/12 - vlan access 300
+      aoscx_l2_interface:
+        interface: 1/1/12
+        vlan_mode: access
+        vlan_access: '300'
+
+    - name: Configure Interface 1/1/13 - vlan trunk allowed all, vlan trunk native 400 tag
+      aoscx_l2_interface:
+        interface: 1/1/13
+        vlan_mode: trunk
+        trunk_allowed_all: True
+        native_vlan_id: '400'
+        native_vlan_tag: True
+
     - name: Disable Interface 1/1/14
       aoscx_interface:
         name: 1/1/14
