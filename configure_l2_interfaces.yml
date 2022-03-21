@@ -1,0 +1,11 @@
+- hosts: all
+  collections:
+    - arubanetworks.aoscx
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  gather_facts: False
+  tasks:
+    - name: Disable Interface 1/1/14
+      aoscx_interface:
+        name: 1/1/14
+        enabled: true
