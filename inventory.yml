@@ -5,7 +5,7 @@ all:
       ansible_user: admin
       ansible_password: password
       ansible_network_os: arubanetworks.aoscx.aoscx
-      ansible_connection: httpapi  # REST API via pyaoscx connection method
+      ansible_connection: arubanetworks.aoscx.aoscx  # REST API via pyaoscx connection method
       ansible_aoscx_validate_certs: False
       ansible_aoscx_use_proxy: False
       ansible_acx_no_proxy: True
